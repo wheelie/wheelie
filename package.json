@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/palazzem/wheelie/issues"
   },
-  "homepage": "https://github.com/palazzem/wheelie"
+  "homepage": "https://github.com/palazzem/wheelie",
+  "dependencies": {
+    "chalk": "^1.1.0"
+  }
 }
