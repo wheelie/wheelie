@@ -17,7 +17,7 @@
     "toolchain"
   ],
   "author": "Emanuele Palazzetti <hello@palazzetti.me>",
-  "license": "BSD-2",
+  "license": "BSD-2-Clause",
   "bugs": {
     "url": "https://github.com/palazzem/wheelie/issues"
   },
