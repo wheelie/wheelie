@@ -1,0 +1,25 @@
+{
+  "name": "wheelie",
+  "version": "0.0.0",
+  "description": "Small but efficient frontend toolchain, built on top of Gulp and insipired by Frigate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/palazzem/wheelie"
+  },
+  "keywords": [
+    "gulp",
+    "wheelie",
+    "frontend",
+    "toolchain"
+  ],
+  "author": "Emanuele Palazzetti <hello@palazzetti.me>",
+  "license": "BSD-2",
+  "bugs": {
+    "url": "https://github.com/palazzem/wheelie/issues"
+  },
+  "homepage": "https://github.com/palazzem/wheelie"
+}
