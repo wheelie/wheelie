@@ -4,7 +4,8 @@
   "description": "Small but efficient frontend toolchain, built on top of Gulp and insipired by Frigate",
   "main": "lib/cli/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/testem/testem.js ci",
+    "tdd": "node_modules/testem/testem.js"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,11 @@
+framework: mocha
+src_files:
+    - node_modules/chai/chai.js
+    - lib/**/*.js
+    - tests/setup.js
+    - tests/test_*.js
+watch_files:
+    - lib/**/*.js
+    - tests/**/*.js
+launch_in_dev:
+    - phantomjs
