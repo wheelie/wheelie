@@ -2,6 +2,14 @@
 Wheelie
 =======
 
+.. image:: https://travis-ci.org/palazzem/wheelie.svg
+    :target: https://travis-ci.org/palazzem/wheelie
+    :alt: Build Status
+
+.. image:: https://david-dm.org/palazzem/wheelie.svg
+    :target: https://david-dm.org/palazzem/wheelie
+    :alt: Dependency Status
+
 Small but efficient frontend toolchain, built on top of `Gulp`_ and inspired by `Frigate`_.
 
 This project is under heavy development; further information will be released soon.
