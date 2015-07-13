@@ -64,7 +64,7 @@ describe('A Logger', function () {
       expect(logger.writeIsEnabled('ERROR')).to.be.true;
     });
 
-    it('should disable the loggin if DISABLED is selected', function() {
+    it('should disable the logging if DISABLED write level is selected', function() {
       logger.setWriteLevel('DISABLED');
       expect(logger.writeIsEnabled('DEBUG')).to.be.false;
       expect(logger.writeIsEnabled('INFO')).to.be.false;
