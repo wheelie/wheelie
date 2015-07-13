@@ -6,6 +6,20 @@ Small but efficient frontend toolchain, built on top of `Gulp`_ and inspired by 
 
 This project is under heavy development; further information will be released soon.
 
+Testing
+-------
+
+We use `Testem`_ as a test runner. Install all development dependencies and launch Testem
+in continuous integration mode:
+
+.. code-block:: bash
+
+    $ npm install
+    $ npm run test
+
+.. _Testem: https://github.com/airportyh/testem
+
+
 License
 -------
 
