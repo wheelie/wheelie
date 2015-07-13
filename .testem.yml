@@ -7,5 +7,9 @@ src_files:
 watch_files:
     - lib/**/*.js
     - tests/**/*.js
+launchers:
+    node:
+        command: node_modules/mocha/bin/mocha tests/test_*.js -R tap
+        protocol: tap
 launch_in_dev:
-    - phantomjs
+    - node
