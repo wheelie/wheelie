@@ -16,6 +16,7 @@ in continuous integration mode:
 
     $ npm install
     $ npm run test
+    $ npm run test:tdd # (optional)
 
 .. _Testem: https://github.com/airportyh/testem
 

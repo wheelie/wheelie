@@ -1,6 +1,5 @@
-framework: mocha
+framework: mocha+chai
 src_files:
-    - node_modules/chai/chai.js
     - lib/**/*.js
     - tests/setup.js
     - tests/test_*.js
@@ -8,8 +7,10 @@ watch_files:
     - lib/**/*.js
     - tests/**/*.js
 launchers:
-    node:
-        command: node_modules/mocha/bin/mocha tests/test_*.js -R tap
+    mocha:
+        command: node_modules/mocha/bin/mocha --timeout 3000 tests/test_*.js -R tap
         protocol: tap
 launch_in_dev:
-    - node
+    - mocha
+launch_in_ci:
+    - mocha

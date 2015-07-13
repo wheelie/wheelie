@@ -5,7 +5,7 @@
   "main": "lib/cli/index.js",
   "scripts": {
     "test": "node_modules/testem/testem.js ci",
-    "tdd": "node_modules/testem/testem.js"
+    "test:tdd": "node_modules/testem/testem.js"
   },
   "repository": {
     "type": "git",
