@@ -1,4 +1,3 @@
-var expect = require('chai').expect;
 var LoggerClass = require('../lib/logging/logger');
 
 describe('A Logger', function () {

@@ -1,14 +1,13 @@
 framework: mocha+chai
 src_files:
     - lib/**/*.js
-    - tests/setup.js
     - tests/test_*.js
 watch_files:
     - lib/**/*.js
     - tests/**/*.js
 launchers:
     mocha:
-        command: node_modules/mocha/bin/mocha --timeout 3000 tests/test_*.js -R tap
+        command: node_modules/mocha/bin/mocha --require tests/setup.js --timeout 3000 tests/test_*.js -R tap
         protocol: tap
 launch_in_dev:
     - mocha
