@@ -27,7 +27,7 @@ describe('A Logger', function () {
   it('should raise an exception if write level doesn\'t exist', function() {
     var fn = function() { logger.setWriteLevel('MAGIC_LEVEL'); };
     expect(fn).to.throw(Error);
-    expect(fn).to.throw('Selected write level \'MAGIC_LEVEL\' doesn\'t exist');
+    expect(fn).to.throw('Write level "MAGIC_LEVEL" doesn\'t exist');
   });
 
   describe('with a write level order', function() {
