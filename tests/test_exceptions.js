@@ -18,4 +18,10 @@ describe('Exceptions list', function() {
     expect(fn).to.throw(Error);
     expect(fn).to.throw('IllegalArgument');
   });
+
+  it('should return an Error for NotImplementedError exception', function() {
+    var fn = function() { throw exceptions.NotImplementedError() };
+    expect(fn).to.throw(Error);
+    expect(fn).to.throw('NotImplementedError');
+  });
 });
