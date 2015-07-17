@@ -80,4 +80,14 @@ describe('Utilities:', function() {
       expect(fn).to.throw('AttributeError');
     });
   });
+
+  describe('extend', function() {
+    it('should merge two JavaScript objects, updating their values', function() {
+      var oldObj = { 'foo': 'foo', 'bar': 'foo' };
+      var updateObj = { 'foo': 'bar' };
+
+      var newObj = utils.extend({}, oldObj, updateObj);
+      expect(newObj).to.be.deep.eql({'foo': 'bar', 'bar': 'foo'});
+    });
+  });
 });
