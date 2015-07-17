@@ -23,11 +23,18 @@ in continuous integration mode:
 .. code-block:: bash
 
     $ npm install
-    $ npm run test
-    $ npm run test:tdd # (optional)
+    $ npm run test     # (launches testem in CI mode)
+    $ npm run test:tdd # (uses testem TDD)
+    $ npm run jshint   # (linting)
+
+You can also use the included NPM ``script``, that launches ``jshint`` before CI tests:
+
+.. code-block:: bash
+
+    $ npm test
+
 
 .. _Testem: https://github.com/airportyh/testem
-
 
 License
 -------
