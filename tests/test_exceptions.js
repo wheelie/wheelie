@@ -24,4 +24,10 @@ describe('Exceptions list', function() {
     expect(fn).to.throw(Error);
     expect(fn).to.throw('NotImplementedError');
   });
+
+  it('should return an Error for KeyError exception', function() {
+    var fn = function() { throw exceptions.KeyError() };
+    expect(fn).to.throw(Error);
+    expect(fn).to.throw('KeyError');
+  });
 });
