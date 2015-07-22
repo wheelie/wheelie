@@ -13,7 +13,7 @@ describe('Registry model', function() {
 
   describe('add method', function() {
     it('should add a new Task if it\'s an instance of Task', function() {
-      var task = new Task('assets', '.', '.', function() {}, {});
+      var task = new Task('assets', function() {}, {});
       var fn = function() { registry.add(task); };
       expect(fn).to.not.throw(Error);
     });
@@ -32,7 +32,7 @@ describe('Registry model', function() {
     });
 
     it('should increase the internal size attribute', function() {
-      var task = new Task('assets', '.', '.', function() {}, {});
+      var task = new Task('assets', function() {}, {});
       registry.add(task);
       expect(registry.size).to.be.equal(1);
     });
@@ -40,7 +40,7 @@ describe('Registry model', function() {
 
   describe('get method', function() {
     it('should return a Task or TaskGroup if it\'s available inside the registry', function() {
-      var task = new Task('assets', '.', '.', function() {}, {});
+      var task = new Task('assets', function() {}, {});
       registry.add(task);
       expect(registry.get('assets')).to.be.eql(task);
     });
@@ -58,8 +58,8 @@ describe('Registry model', function() {
     });
 
     it('should return an array of Task and/or TaskGroup items', function() {
-      var assets = new Task('assets', '.', '.', function() {}, {});
-      var templates = new Task('templates', '.', '.', function() {}, {});
+      var assets = new Task('assets', function() {}, {});
+      var templates = new Task('templates', function() {}, {});
       registry.add(assets);
       registry.add(templates);
       expect(registry.items()).to.be.eql([assets, templates]);
@@ -74,7 +74,7 @@ describe('Registry model', function() {
     });
 
     it('should remove a Task or TaskGroup if it\'s available inside the registry', function() {
-      var task = new Task('assets', '.', '.', function() {}, {});
+      var task = new Task('assets', function() {}, {});
       registry.add(task);
       registry.remove('assets');
 
@@ -84,7 +84,7 @@ describe('Registry model', function() {
     });
 
     it('should decrease the internal size attribute', function() {
-      var task = new Task('assets', '.', '.', function() {}, {});
+      var task = new Task('assets', function() {}, {});
       registry.add(task);
       registry.remove('assets');
       expect(registry.size).to.be.equal(0);
@@ -94,7 +94,7 @@ describe('Registry model', function() {
   describe('update method', function() {
     it('should add options to the Task, if the found task is a Task instance', function() {
       var options = { 'foo': 'bar' };
-      var task = new Task('assets', '.', '.', function() {});
+      var task = new Task('assets', function() {});
       registry.add(task);
 
       registry.update('assets', options);
@@ -103,7 +103,7 @@ describe('Registry model', function() {
 
     it('should update the Task options, if the found task is a Task instance', function() {
       var options = { 'foo': 'bar' };
-      var task = new Task('assets', '.', '.', function() {}, { 'foo': 'foo', 'bar': 'foo' });
+      var task = new Task('assets', function() {}, { 'foo': 'foo', 'bar': 'foo' });
       registry.add(task);
 
       registry.update('assets', options);
