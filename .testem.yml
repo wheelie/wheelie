@@ -1,4 +1,4 @@
-framework: mocha+chai
+framework: mocha
 src_files:
     - lib/**/*.js
     - tests/test_*.js
