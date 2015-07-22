@@ -10,6 +10,10 @@ Wheelie
     :target: https://david-dm.org/palazzem/wheelie
     :alt: Dependency Status
 
+.. image:: https://david-dm.org/palazzem/wheelie/dev-status.svg
+    :target: https://david-dm.org/palazzem/wheelie#info=devDependencies
+    :alt: Dev Dependency Status
+
 Small but efficient frontend toolchain, built on top of `Gulp`_ and inspired by `Frigate`_.
 
 This project is under heavy development; further information will be released soon.
