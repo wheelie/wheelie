@@ -28,6 +28,11 @@ describe('Task model', function() {
       expect(fn).to.throw('IllegalArgument');
     });
 
+    it('should throw a NotImplementedError with the default function', function() {
+      var fn = function() { new Task('name', '.', '.', Task.prototype.run).run() };
+      expect(fn).to.throw('NotImplementedError');
+    });
+
     it('should work with valid arguments', function() {
       var task;
 
