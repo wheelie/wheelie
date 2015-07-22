@@ -52,6 +52,20 @@ describe('Registry model', function() {
     });
   });
 
+  describe('items method', function() {
+    it('should return an empty array if the registry is empty', function() {
+      expect(registry.items()).to.be.eql([]);
+    });
+
+    it('should return an array of Task and/or TaskGroup items', function() {
+      var assets = new Task('assets', '.', '.', function() {}, {});
+      var templates = new Task('templates', '.', '.', function() {}, {});
+      registry.add(assets);
+      registry.add(templates);
+      expect(registry.items()).to.be.eql([assets, templates]);
+    });
+  });
+
   describe('remove method', function() {
     it('should raise a KeyError exception if the task is not available in the registry', function() {
       var fn = function() { registry.remove('nope'); };
