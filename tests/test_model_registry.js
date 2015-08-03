@@ -1,4 +1,4 @@
-var exceptions = require('../lib/exceptions');
+var exceptions = require('../lib/errors/exceptions');
 var Registry = require('../lib/models/registry');
 var Task = require('../lib/models/task');
 
