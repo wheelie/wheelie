@@ -27,9 +27,13 @@
   },
   "homepage": "https://github.com/palazzem/wheelie",
   "dependencies": {
+    "browser-sync": "^2.8.2",
     "chalk": "^1.1.0",
     "gulp": "^3.9.0",
-    "gulp-notify": "^2.2.0"
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-sourcemaps": "^1.5.2"
   },
   "devDependencies": {
     "chai": "^3.0.0",
