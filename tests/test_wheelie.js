@@ -2,7 +2,6 @@ var Wheelie = require('../lib/cli/wheelie');
 
 var Registry = require('../lib/models/registry');
 var Task = require('../lib/models/task');
-var TaskGroup = require('../lib/models/task_group');
 
 
 describe('Wheelie', function() {
@@ -13,9 +12,9 @@ describe('Wheelie', function() {
     // initializes Wheelie with a stubbed registry
     wheelie = new Wheelie();
     registry = wheelie.registry;
-    sinon.stub(registry, "add");
-    sinon.stub(registry, "remove");
-    sinon.stub(registry, "update");
+    sinon.stub(registry, 'add');
+    sinon.stub(registry, 'remove');
+    sinon.stub(registry, 'update');
   });
 
   describe('initialization', function() {
@@ -37,45 +36,28 @@ describe('Wheelie', function() {
 
   describe('registry manipulation', function() {
     it('should add a Task into the registry', function() {
-      var task = new Task('task', function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {}, {'key': 'value'});
       wheelie.add(task);
       expect(registry.add.calledOnce).to.be.true;
     });
 
-    it('should add a Task into the registry', function() {
-      var group = new TaskGroup('group', ['task']);
-      wheelie.add(group);
-      expect(registry.add.calledOnce).to.be.true;
-    });
+    it('should add a group of Task into the registry', function() {
+      var task = new Task('task', [], function() {}, {'key': 'value'});
+      var anotherTask = new Task('task_2', [], function() {}, {'key': 'value'});
 
-    it('should add a group of mixed Task and TaskGroup into the registry', function() {
-      var task = new Task('task', function() {}, {'key': 'value'});
-      var group = new TaskGroup('group', ['task']);
-      wheelie.add([task, group]);
+      wheelie.add([task, anotherTask]);
       expect(registry.add.calledTwice).to.be.true;
     });
 
     it('should remove a Task from the registry', function() {
-      var task = new Task('task', function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {}, {'key': 'value'});
       wheelie.remove('task');
       expect(registry.remove.calledOnce).to.be.true;
     });
 
-    it('should remove a Task from the registry', function() {
-      var group = new TaskGroup('group', ['task']);
-      wheelie.remove('group');
-      expect(registry.remove.calledOnce).to.be.true;
-    });
-
     it('should update a Task in the registry', function() {
-      var task = new Task('task', function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {}, {'key': 'value'});
       wheelie.update('task', {});
-      expect(registry.update.calledOnce).to.be.true;
-    });
-
-    it('should update a Task in the registry', function() {
-      var group = new TaskGroup('group', ['task']);
-      wheelie.update('group', {});
       expect(registry.update.calledOnce).to.be.true;
     });
   });
@@ -89,6 +71,26 @@ describe('Wheelie', function() {
     it('should change the global dest attribute', function() {
       wheelie.setDestination('new_destination');
       expect(wheelie.options.dest).to.be.equal('new_destination');
+    });
+  });
+
+  describe('Gulp interactions', function() {
+    it('should load all registered tasks into Gulp registry', function() {
+      sinon.stub(wheelie.gulp, 'task');
+      wheelie.registry.add.restore();
+
+      var emptyFn = function() {};
+
+      var task = new Task('task', [], emptyFn, {'key': 'value'});
+      var anotherTask = new Task('task_2', ['task'], emptyFn, {'key': 'value'});
+
+      wheelie.add([task, anotherTask]);
+      wheelie.build();
+
+      firstCall = wheelie.gulp.task.getCall(0);
+      secondCall = wheelie.gulp.task.getCall(1);
+      expect(firstCall.calledWith('task', [], emptyFn)).to.be.true;
+      expect(secondCall.calledWith('task_2', ['task'], emptyFn)).to.be.true;
     });
   });
 });
