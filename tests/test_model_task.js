@@ -36,6 +36,7 @@ describe('Task model', function() {
       var fn = function() { task = new Task('name', []) };
       expect(fn).to.not.throw('IllegalArgument');
       expect(task.name).to.be.equal('name');
+      expect(task.dependencies).to.be.eql([]);
       expect(typeof task.run).to.be.equal('function');
       expect(task.config()).to.be.eql({});
     });
@@ -46,6 +47,7 @@ describe('Task model', function() {
       var fn = function() { task = new Task('name', [], function() {}) };
       expect(fn).to.not.throw('IllegalArgument');
       expect(task.name).to.be.equal('name');
+      expect(task.dependencies).to.be.eql([]);
       expect(typeof task.run).to.be.equal('function');
       expect(task.config()).to.be.eql({});
     });
@@ -57,6 +59,7 @@ describe('Task model', function() {
       var fn = function() { task = new Task('name', [], function() {}, config) };
       expect(fn).to.not.throw('IllegalArgument');
       expect(task.name).to.be.equal('name');
+      expect(task.dependencies).to.be.eql([]);
       expect(typeof task.run).to.be.equal('function');
       expect(typeof task.config).to.be.equal('function');
       expect(task.config()).to.be.eql({'key': 'value'});
