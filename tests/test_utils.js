@@ -3,81 +3,81 @@ var utils = require('../lib/utils');
 
 
 describe('Utilities:', function() {
-  describe('getMandatoryField', function() {
+  describe('mandatory', function() {
     it('should return the field if it\'s not undefined', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryField('ok'); };
+      var fn = function() { field = utils.mandatory('ok'); };
       expect(fn).to.not.throw('IllegalArgument');
       expect(field).to.be.equal('ok');
     });
 
     it('should throw an error if field is undefined', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryField(undefined); };
+      var fn = function() { field = utils.mandatory(undefined); };
       expect(fn).to.throw('IllegalArgument');
     });
 
     it('should throw an error if field is null', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryField(null); };
+      var fn = function() { field = utils.mandatory(null); };
       expect(fn).to.throw('IllegalArgument');
     });
   });
 
-  describe('getMandatoryFunction', function() {
+  describe('isFunction', function() {
     it('should return the field if it\'s a function', function() {
       var fakeFn = function() {};
       var field;
 
-      var fn = function() { field = utils.getMandatoryFunction(fakeFn); };
+      var fn = function() { field = utils.isFunction(fakeFn); };
       expect(fn).to.not.throw('IllegalArgument');
       expect(field).to.be.equal(fakeFn);
     });
 
-    it('should throw an error if field is undefined', function() {
+    it('should not throw an error if field is undefined', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryFunction(undefined); };
-      expect(fn).to.throw('IllegalArgument');
+      var fn = function() { field = utils.isFunction(undefined); };
+      expect(fn).to.not.throw('IllegalArgument');
     });
 
-    it('should throw an error if field is null', function() {
+    it('should not throw an error if field is null', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryFunction(null); };
-      expect(fn).to.throw('IllegalArgument');
+      var fn = function() { field = utils.isFunction(null); };
+      expect(fn).to.not.throw('IllegalArgument');
     });
 
     it('should throw an error if field is not a function', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryFunction('wrong'); };
+      var fn = function() { field = utils.isFunction('wrong'); };
       expect(fn).to.throw('IllegalArgument');
     });
   });
 
-  describe('getMandatoryArray', function() {
+  describe('isArray', function() {
     it('should return the field if it\'s an array', function() {
       var field;
 
-      var fn = function() { field = utils.getMandatoryArray([1, 2]); };
+      var fn = function() { field = utils.isArray([1, 2]); };
       expect(fn).to.not.throw('IllegalArgument');
       expect(field).to.be.eql([1, 2]);
     });
 
-    it('should throw an error if field is undefined', function() {
+    it('should not throw an error if field is undefined', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryArray(undefined); };
-      expect(fn).to.throw('AttributeError');
+      var fn = function() { field = utils.isArray(undefined); };
+      expect(fn).to.not.throw('IllegalArgument');
     });
 
-    it('should throw an error if field is null', function() {
+    it('should not throw an error if field is null', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryArray(null); };
-      expect(fn).to.throw('AttributeError');
+      var fn = function() { field = utils.isArray(null); };
+      expect(fn).to.not.throw('IllegalArgument');
     });
 
     it('should throw an error if field is not an array', function() {
       var field;
-      var fn = function() { field = utils.getMandatoryArray('wrong'); };
-      expect(fn).to.throw('AttributeError');
+      var fn = function() { field = utils.isArray('wrong'); };
+      expect(fn).to.throw('IllegalArgument');
     });
   });
 
