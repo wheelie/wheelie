@@ -73,24 +73,4 @@ describe('Wheelie', function() {
       expect(wheelie.options.dest).to.be.equal('new_destination');
     });
   });
-
-  describe('Gulp interactions', function() {
-    it('should load all registered tasks into Gulp registry', function() {
-      sinon.stub(wheelie.gulp, 'task');
-      wheelie.registry.add.restore();
-
-      var emptyFn = function() {};
-
-      var task = new Task('task', [], emptyFn);
-      var anotherTask = new Task('task_2', ['task'], emptyFn);
-
-      wheelie.add([task, anotherTask]);
-      wheelie.build();
-
-      firstCall = wheelie.gulp.task.getCall(0);
-      secondCall = wheelie.gulp.task.getCall(1);
-      expect(firstCall.calledWith('task', [], emptyFn)).to.be.true;
-      expect(secondCall.calledWith('task_2', ['task'], emptyFn)).to.be.true;
-    });
-  });
 });
