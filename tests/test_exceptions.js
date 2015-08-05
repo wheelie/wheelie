@@ -1,4 +1,4 @@
-var exceptions = require('../lib/exceptions');
+var exceptions = require('../lib/errors/exceptions');
 
 describe('Exceptions list', function() {
   it('should return an Error for a generic Exception object', function() {

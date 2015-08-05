@@ -1,7 +1,7 @@
 'use strict';
 
 var wheelie = require('../index');
-var exampleTask = require('../lib/tasks/noop');
+var exampleTask = require('./tasks/noop');
 
 // starting wheelie
 wheelie.add(exampleTask);

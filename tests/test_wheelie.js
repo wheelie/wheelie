@@ -30,7 +30,7 @@ describe('Wheelie', function() {
     it('should store global options', function() {
       expect(wheelie.options).to.not.be.undefined;
       expect(wheelie.options.src).to.be.equal('client');
-      expect(wheelie.options.dest).to.be.equal('dist');
+      expect(wheelie.options.dest).to.be.equal('build');
     });
   });
 

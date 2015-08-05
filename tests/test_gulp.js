@@ -35,6 +35,16 @@ describe('Wheelie, during the build process,', function() {
     expect(secondCall.calledWith('task_2', ['task'], gulpTask)).to.be.true;
   });
 
+  it('should register the Gulp task that doesn\'t have a run() callback', function() {
+    var task = new Task('task', []);
+
+    wheelie.add(task);
+    wheelie.build();
+
+    gulpTask = wheelie.gulp.task.getCall(0);
+    expect(gulpTask.calledWith('task', [], undefined)).to.be.true;
+  });
+
   it('should call the config() callback for each task', function() {
     var emptyFn = function() {};
     var config = sandbox.stub();

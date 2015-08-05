@@ -1,4 +1,4 @@
-var exceptions = require('../lib/exceptions');
+var exceptions = require('../lib/errors/exceptions');
 var utils = require('../lib/utils');
 
 
