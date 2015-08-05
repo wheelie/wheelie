@@ -36,27 +36,27 @@ describe('Wheelie', function() {
 
   describe('registry manipulation', function() {
     it('should add a Task into the registry', function() {
-      var task = new Task('task', [], function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {});
       wheelie.add(task);
       expect(registry.add.calledOnce).to.be.true;
     });
 
     it('should add a group of Task into the registry', function() {
-      var task = new Task('task', [], function() {}, {'key': 'value'});
-      var anotherTask = new Task('task_2', [], function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {});
+      var anotherTask = new Task('task_2', [], function() {});
 
       wheelie.add([task, anotherTask]);
       expect(registry.add.calledTwice).to.be.true;
     });
 
     it('should remove a Task from the registry', function() {
-      var task = new Task('task', [], function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {});
       wheelie.remove('task');
       expect(registry.remove.calledOnce).to.be.true;
     });
 
     it('should update a Task in the registry', function() {
-      var task = new Task('task', [], function() {}, {'key': 'value'});
+      var task = new Task('task', [], function() {});
       wheelie.update('task', {});
       expect(registry.update.calledOnce).to.be.true;
     });
@@ -81,8 +81,8 @@ describe('Wheelie', function() {
 
       var emptyFn = function() {};
 
-      var task = new Task('task', [], emptyFn, {'key': 'value'});
-      var anotherTask = new Task('task_2', ['task'], emptyFn, {'key': 'value'});
+      var task = new Task('task', [], emptyFn);
+      var anotherTask = new Task('task_2', ['task'], emptyFn);
 
       wheelie.add([task, anotherTask]);
       wheelie.build();
