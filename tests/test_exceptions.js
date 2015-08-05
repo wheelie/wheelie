@@ -7,12 +7,6 @@ describe('Exceptions list', function() {
     expect(fn).to.throw('Exception');
   });
 
-  it('should return an Error for AttributeError exception', function() {
-    var fn = function() { throw exceptions.AttributeError() };
-    expect(fn).to.throw(Error);
-    expect(fn).to.throw('AttributeError');
-  });
-
   it('should return an Error for IllegalArgument exception', function() {
     var fn = function() { throw exceptions.IllegalArgument() };
     expect(fn).to.throw(Error);
