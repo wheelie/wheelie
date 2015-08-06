@@ -65,27 +65,27 @@ describe('Wheelie', function() {
   });
 
   describe('configurations', function() {
-    it('should change the src folder attribute', function() {
+    it('should change the "src" folder attribute', function() {
       wheelie.setSrc('new_source');
       expect(wheelie.options.src).to.be.equal('new_source');
     });
 
-    it('should change the build folder attribute', function() {
+    it('should change the "build" folder attribute', function() {
       wheelie.setBuild('new_destination');
       expect(wheelie.options.build).to.be.equal('new_destination');
     });
 
-    it('should change the dist folder attribute', function() {
+    it('should change the "dist" folder attribute', function() {
       wheelie.setDist('new_destination');
       expect(wheelie.options.dist).to.be.equal('new_destination');
     });
 
-    it('should return the build folder if production flag is false', function() {
+    it('should return the "build" folder if production flag is false', function() {
       var out = wheelie.getDest();
       expect(out).to.be.equal('build');
     });
 
-    it('should return the build folder if production flag is false', function() {
+    it('should return the "dist" folder if production flag is true', function() {
       wheelie.options.production = true;
       var out = wheelie.getDest();
       expect(out).to.be.equal('dist');
