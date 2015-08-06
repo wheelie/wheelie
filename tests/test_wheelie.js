@@ -30,7 +30,9 @@ describe('Wheelie', function() {
     it('should store global options', function() {
       expect(wheelie.options).to.not.be.undefined;
       expect(wheelie.options.src).to.be.equal('client');
-      expect(wheelie.options.dest).to.be.equal('build');
+      expect(wheelie.options.build).to.be.equal('build');
+      expect(wheelie.options.dist).to.be.equal('dist');
+      expect(wheelie.options.production).to.be.false;
     });
   });
 
@@ -63,14 +65,30 @@ describe('Wheelie', function() {
   });
 
   describe('configurations', function() {
-    it('should change the global src attribute', function() {
-      wheelie.setSource('new_source');
+    it('should change the src folder attribute', function() {
+      wheelie.setSrc('new_source');
       expect(wheelie.options.src).to.be.equal('new_source');
     });
 
-    it('should change the global dest attribute', function() {
-      wheelie.setDestination('new_destination');
-      expect(wheelie.options.dest).to.be.equal('new_destination');
+    it('should change the build folder attribute', function() {
+      wheelie.setBuild('new_destination');
+      expect(wheelie.options.build).to.be.equal('new_destination');
+    });
+
+    it('should change the dist folder attribute', function() {
+      wheelie.setDist('new_destination');
+      expect(wheelie.options.dist).to.be.equal('new_destination');
+    });
+
+    it('should return the build folder if production flag is false', function() {
+      var out = wheelie.getDest();
+      expect(out).to.be.equal('build');
+    });
+
+    it('should return the build folder if production flag is false', function() {
+      wheelie.options.production = true;
+      var out = wheelie.getDest();
+      expect(out).to.be.equal('dist');
     });
   });
 });
