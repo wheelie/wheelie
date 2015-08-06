@@ -114,4 +114,42 @@ describe('Wheelie, during the build process,', function() {
     expect(args[0]).to.be.eql(wheelie.gulp);
     expect(args[1]).to.be.eql({'key': 'changed', 'patch': 'applied'});
   });
+
+  it('should prevent global settings pollution between plugins execution', function() {
+    var gulpTask = sandbox.stub();
+    var run = function() { return gulpTask; };
+
+    var maliciousConfig = function(globals) {
+      globals.dest = '/';
+      return {};
+    }
+
+    var goodConfig = sandbox.stub();
+
+    var task = new Task('task', [], run, maliciousConfig);
+    var anotherTask = new Task('task_2', ['task'], run, goodConfig);
+
+    wheelie.add([task, anotherTask]);
+    wheelie.build();
+
+    var passedSettings = goodConfig.getCall(0).args[0];
+    expect(passedSettings.dest).to.be.not.equal('/');
+  });
+
+  it('should provide a "dest" folder according to production status', function() {
+    var spy = sandbox.spy(wheelie, "getDest");
+
+    var emptyFn = function() {};
+    var config = sandbox.stub();
+
+    var task = new Task('task', [], emptyFn, config);
+
+    wheelie.add(task);
+    wheelie.build();
+
+    var passedSettings = config.getCall(0).args[0];
+
+    expect(spy.calledOnce).to.be.true;
+    expect(passedSettings.dest).to.be.not.undefined;
+  });
 });
