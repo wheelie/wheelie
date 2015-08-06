@@ -29,7 +29,6 @@
   "dependencies": {
     "browser-sync": "^2.8.2",
     "chalk": "^1.1.0",
-    "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-jshint": "^1.11.2",
     "gulp-notify": "^2.2.0",
@@ -40,6 +39,7 @@
   },
   "devDependencies": {
     "chai": "^3.0.0",
+    "gulp": "^3.9.0",
     "jshint": "^2.8.0",
     "mocha": "^2.2.5",
     "sinon": "^1.15.4",
