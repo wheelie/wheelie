@@ -79,7 +79,7 @@ the following content:
 .. code-block:: javascript
 
     // requiring the Task model
-    var Task = require('../models/task');
+    var Task = require('wheelie/lib/models/task');
 
     // this function provides a lazy loading for your task configurations;
     // in this step, you can access to the wheelie global options
