@@ -210,3 +210,15 @@ License
 -------
 
 Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LICENSE`` file.
+
+Changelog
+---------
+
+0.1.0 [2015-08-07]
+~~~~~~~~~~~~~~~~~~
+
+* First pre-release
+* Sharing the same ``gulp`` instance imported from the main project
+* Providing the Wheelie registry
+* ``Task#config()`` lazy loading
+* Wheelie tasks configurations can be updated using ``Wheelie#update()``
