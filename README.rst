@@ -16,31 +16,35 @@ Wheelie
 
 Small but efficient frontend toolchain, built on top of `Gulp`_ and inspired by `Frigate`_.
 
-Wheelie isn't a task runner, a build system, a ``Gulp`` wrapper or anything like this. It's just a common
-interface to define your ``Gulp`` recipes so that you can easily reshare, reuse and update at once your
+Wheelie isn't a task runner, a build system or a ``Gulp`` wrapper. It's just a common interface
+to your ``Gulp`` tasks so that you can reshare, reuse and update them easily improving your
 automated workflow.
 
-This project is under **heavy development**; further information will be released soon.
+.. _Gulp: http://gulpjs.com/
+.. _Frigate: https://github.com/lincolnloop/generator-frigate
 
 Usage
 -----
 
-**Warning**: the public API isn't stable yet and may be changed in future!
+**Warning**: the public API isn't stable yet and may be changed in the future!
 
 Create a ``Gulpfile.js`` in your project root folder with the following content:
 
 .. code-block:: javascript
 
-    // importing Wheelie instance and a list of tasks
+    // importing your gulp reference
+    var gulp = require('gulp');
+
+    // importing Wheelie instance and a list of tasks (recipe)
     var wheelie = require('wheelie');
     var recipe = require('wheelie-recipe');
 
-    // starting Wheelie defining the default task
+    // adding a recipe to Wheelie, defining the default task
     wheelie.add(recipe);
     wheelie.setDefault('watch');
     wheelie.build();
 
-    // <-- at this point, Gulp is configured according to Wheelie registry
+    // <-- at this point, Gulp is configured with a set of tasks available in the wheelie-recipe package
 
 With the above ``Gulpfile``, you can launch the ``watch`` task simply with:
 
@@ -51,90 +55,93 @@ With the above ``Gulpfile``, you can launch the ``watch`` task simply with:
 
 Easy not?
 
-Wheelie recipes
----------------
-
-A Wheelie recipe is just a collection of common ``Gulp`` tasks. Even if this work can be achieved using
-``Gulp`` directly, Wheelie exposes a common interface for tasks creation and global options. In this way, you can
-create a collection of common tasks usable in all of your projects.
-
-
 Write your own recipe
 ---------------------
 
-The building blocks of a Wheelie recipe are:
+A Wheelie recipe is just a collection of ``Gulp`` tasks. Even if you may achieve this work using just ``Gulp#task()``
+method, Wheelie exposes a common interface for tasks definition and configurations passing. In this way, you can
+create a collection of common tasks usable for all of your projects.
 
-* ``Task`` that represents a single ``Gulp`` task; common examples are ``watch``, ``sass`` or ``browserify``
-* ``TaskGroup`` that represents a collection of tasks; a common example is ``build``
+The goal of this project is to create a kind of registry for ``Gulp`` tasks so that you can write your own
+``npm`` packages, that contain your common ``Gulp`` tasks. In the meantime, because every project may be different
+and may require little customizations (i.e. changing the destination folder for all of your plugins or changing
+the image optimization level), Wheelie provides an easy way to update your plugins configurations.
 
 Task
 ~~~~
+
+The building block of a Wheelie recipe is the ``Task`` model that defines a ``Gulp`` task. Common examples
+are ``watch``, ``sass`` or ``browserify`` tasks.
 
 To create a new ``Task`` you should create a new file in your root folder such as ``tasks/assets.js`` with
 the following content:
 
 .. code-block:: javascript
 
-    var Task = require('wheelie/models/task');
-    var gulp = require('wheelie').gulp;
-    var options = require('wheelie').options;
+    // requiring the Task model
+    var Task = require('../models/task');
 
-    var config = {
-      src: options.src + '/assets/**',
-      dest: options.dest + '/assets'
+    // this function provides a lazy loading for your task configurations;
+    // in this step, you can access to the wheelie global options
+    function config(globals) {
+      return {
+        src: globals.src + '/assets/**',
+        dest: globals.dest + '/assets'
+      };
     }
 
-    function run() {
-      return gulp.src(config.src)
-          .pipe(gulp.dest(config.dest));
+    // this function should return the same callback you usually pass to gulp.task();
+    // in this step, you can access to a common gulp reference and to the Task config
+    // options, eventually updated by your gulpfile.js
+    function run(gulp, config) {
+      return function() {
+          return gulp.src(config.src)
+            .pipe(gulp.dest(config.dest));
+      };
     }
 
-    module.exports = new Task('assets', run, config);
-
-
-TaskGroup
-~~~~~~~~~
-
-For this example we may assume that we have some common tasks such as ``'browserify``, ``sass``, ``assets``
-and ``templates`` that are part of the ``build`` group. To create a new ``TaskGroup`` you should create
-the ``tasks/build.js`` file in your root folder with the following content:
-
-.. code-block:: javascript
-
-    var TaskGroup = require('wheelie/models/task_group');
-    module.exports = new TaskGroup('build', ['browserify', 'sass', 'assets', 'templates']);
+    // you exports a new Task, named 'assets' with the 'image' task as a dependency;
+    // in this case, 'image' task is launched first
+    module.exports = new Task('assets', ['image'], run, config);
 
 
 The recipe
 ~~~~~~~~~~
 
-The first step is to create the ``tasks/recipe.js`` file as your recipe container:
+To put everything together, you should create the ``tasks/recipe.js`` file
+as your recipe container:
 
 .. code-block:: javascript
 
+    // assuming you have the following tasks
     var browserify = require('./browserify');
     var sass = require('./sass');
     var assets = require('./assets');
     var templates = require('./templates');
     var build = require('./build');
 
+    // you should just return a list of them
     module.exports = [browserify, sass, assets, templates, build];
 
 
-Then, you should just configure Wheelie to add your recipe in its recipe list:
+To add the recipe above in Wheelie tasks list, simply:
 
 .. code-block:: javascript
 
+    // ...
+
+    // import wheelie and your recipe
     var wheelie = require('wheelie');
     var recipe = require('./tasks/recipe');
 
-    // starting Wheelie defining the default task
+    // add the recipe
     wheelie.add(recipe);
     wheelie.setDefault('build');
-    wheelie.build();
+
+    // ...
 
 
-This configuration, allows you to launch these ``Gulp`` commands:
+Using this configuration, you can launch these ``Gulp`` commands:
 
 .. code-block:: bash
 
@@ -149,28 +156,37 @@ Reusing the recipe
 
 To reuse a recipe you can create a Wheelie recipe `npm`_ plugin so that you can simply install your recipe
 and ``wheelie`` packages as ``devDependencies`` in your ``package.json`` file. In this way, you can version
-your recipes and quickly update at once all your projects.
+your recipes and quickly update your projects workflows.
 
-Anyway, some projects may be different from others and you may need some tweaks among tasks configurations.
-For this reason, Wheelie exposes an ``update`` method that replaces the task configuration keys with the one
+.. _npm: https://www.npmjs.com/
+
+Updating tasks options
+~~~~~~~~~~~~~~~~~~~~~~
+
+Some projects may require different tasks configurations, despite what you've planned while writing your recipe.
+For this reason, Wheelie exposes an ``update`` method that replaces a task configuration key with the one you've
 provided. In this case you can just:
 
 .. code-block:: javascript
 
-    // Gulpfile.js
+    // gulpfile.js
     // ... other Wheelie configurations ...
 
+    // updates 'sass' configurations, setting 'sourceComments' value to 'map'
     wheelie.update('sass', { sourceComments: 'map' });
 
+    // but don't update your tasks after this point
+    wheelie.build();
 
-Easy not?
 
-.. _npm: https://www.npmjs.com/
+During the ``Wheelie#build()`` process, ``Task#config()`` is called and the returned object is patched with your
+updates. At this point, the resulting config is passed to ``Task#run()`` method, together with the common ``gulp``
+instance.
 
 Examples
 --------
 
-You can find a ``Gulpfile.js`` example in the ``examples/`` folder. Go into that folder
+You can find a ``gulpfile.js`` example in the ``examples/`` folder. Go into that folder
 and launch ``gulp`` as usual. This initial example will print the current ``Task`` configuration
 together with the ``gulp`` instance object.
 
@@ -184,14 +200,8 @@ in continuous integration mode:
 
     $ npm install
     $ npm run test     # (launches testem in CI mode)
-    $ npm run test:tdd # (uses testem TDD)
+    $ npm run test:tdd # (uses testem TDD mode)
     $ npm run jshint   # (linting)
-
-You can also use the included NPM ``script``, that launches ``jshint`` before CI tests:
-
-.. code-block:: bash
-
-    $ npm test
 
 
 .. _Testem: https://github.com/airportyh/testem
@@ -200,6 +210,3 @@ License
 -------
 
 Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LICENSE`` file.
-
-.. _Gulp: http://gulpjs.com/
-.. _Frigate: https://github.com/lincolnloop/generator-frigate
