@@ -218,6 +218,15 @@ Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LI
 Changelog
 ---------
 
+0.1.2 [2015-08-07]
+~~~~~~~~~~~~~~~~~~
+
+* `#16`_: Task#run() method receives Wheelie global options
+* `#17`_: ``noop`` helper that disables a plugin
+
+.. _#16: https://github.com/palazzem/wheelie/issues/16
+.. _#17: https://github.com/palazzem/wheelie/issues/17
+
 0.1.1 [2015-08-07]
 ~~~~~~~~~~~~~~~~~~
 
