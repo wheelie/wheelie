@@ -1,9 +1,12 @@
 'use strict';
 
+var gulp = require('gulp');
 var wheelie = require('../index');
-var exampleTask = require('./tasks/noop');
+var noopTask = require('./tasks/noop');
 
 // starting wheelie
-wheelie.add(exampleTask);
+wheelie.add(noopTask);
 wheelie.setDefault('noop');
+
+wheelie.update('noop', {'key': 'updated'});
 wheelie.build();
