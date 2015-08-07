@@ -29,6 +29,7 @@
   "dependencies": {
     "chalk": "^1.1.0",
     "gulp-notify": "^2.2.0",
+    "through2": "^2.0.0",
     "yargs": "^3.17.1"
   },
   "devDependencies": {
