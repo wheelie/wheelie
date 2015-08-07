@@ -134,7 +134,7 @@ To add the recipe above in Wheelie tasks list, simply:
     var wheelie = require('wheelie');
     var recipe = require('./tasks/recipe');
 
-    // add the recipe
+    // add the recipe and set a default (not mandatory)
     wheelie.add(recipe);
     wheelie.setDefault('build');
 
@@ -170,9 +170,9 @@ provided. In this case you can just:
 .. code-block:: javascript
 
     // gulpfile.js
-    // ... other Wheelie configurations ...
+    // ...
 
-    // updates 'sass' configurations, setting 'sourceComments' value to 'map'
+    // update 'sass' configurations, changing 'sourceComments' value to 'map'
     wheelie.update('sass', { sourceComments: 'map' });
 
     // but don't update your tasks after this point
