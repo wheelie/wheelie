@@ -214,6 +214,11 @@ Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LI
 Changelog
 ---------
 
+0.1.1 [2015-08-07]
+~~~~~~~~~~~~~~~~~~
+
+* added ``gulp-notify`` plugin used by the error handler
+
 0.1.0 [2015-08-07]
 ~~~~~~~~~~~~~~~~~~
 

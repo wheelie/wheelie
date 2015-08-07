@@ -28,6 +28,7 @@
   "homepage": "https://github.com/palazzem/wheelie",
   "dependencies": {
     "chalk": "^1.1.0",
+    "gulp-notify": "^2.2.0",
     "yargs": "^3.17.1"
   },
   "devDependencies": {
