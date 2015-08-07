@@ -190,6 +190,10 @@ You can find a ``gulpfile.js`` example in the ``examples/`` folder. Go into that
 and launch ``gulp`` as usual. This initial example will print the current ``Task`` configuration
 together with the ``gulp`` instance object.
 
+A working `wheelie-recipe`_ is also available.
+
+.. _wheelie-recipe: https://github.com/palazzem/wheelie-recipe
+
 Testing
 -------
 
