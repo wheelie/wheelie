@@ -29,9 +29,9 @@ describe('Wheelie', function() {
 
     it('should store global options', function() {
       expect(wheelie.options).to.not.be.undefined;
-      expect(wheelie.options.src).to.be.equal('client');
-      expect(wheelie.options.build).to.be.equal('build');
-      expect(wheelie.options.dist).to.be.equal('dist');
+      expect(wheelie.options.src).to.be.equal('client/');
+      expect(wheelie.options.build).to.be.equal('build/');
+      expect(wheelie.options.dist).to.be.equal('dist/');
       expect(wheelie.options.production).to.be.false;
     });
   });
@@ -82,13 +82,13 @@ describe('Wheelie', function() {
 
     it('should return the "build" folder if production flag is false', function() {
       var out = wheelie.getDest();
-      expect(out).to.be.equal('build');
+      expect(out).to.be.equal('build/');
     });
 
     it('should return the "dist" folder if production flag is true', function() {
       wheelie.options.production = true;
       var out = wheelie.getDest();
-      expect(out).to.be.equal('dist');
+      expect(out).to.be.equal('dist/');
     });
   });
 });
