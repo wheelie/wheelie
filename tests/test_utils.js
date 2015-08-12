@@ -89,5 +89,21 @@ describe('Utilities:', function() {
       var newObj = utils.extend({}, oldObj, updateObj);
       expect(newObj).to.be.deep.eql({'foo': 'bar', 'bar': 'foo'});
     });
+
+    it('should deep merge two JavaScript objects in a new one, updating their values', function() {
+      var oldObj = {'settings': {'foo': 'foo'}};
+      var updateObj = {'settings': {'foo': 'bar'}};
+
+      var newObj = utils.extend({}, oldObj, updateObj);
+      expect(newObj).to.be.deep.eql({'settings': {'foo': 'bar'}});
+    });
+
+    it('should deep merge two JavaScript objects replacing the old one, updating their values', function() {
+      var oldObj = {'settings': {'foo': 'foo'}};
+      var updateObj = {'settings': {'foo': 'bar'}};
+
+      var newObj = utils.extend(oldObj, updateObj);
+      expect(newObj).to.be.deep.eql({'settings': {'foo': 'bar'}});
+    });
   });
 });
