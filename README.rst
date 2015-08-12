@@ -218,10 +218,16 @@ Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LI
 Changelog
 ---------
 
+0.1.3 [2015-08-12]
+~~~~~~~~~~~~~~~~~~
+
+* Bugfix: ``Utils#extend()`` method now deeply extends and updates ``Array`` objects
+* Convention: all paths uses a trailing slash
+
 0.1.2 [2015-08-07]
 ~~~~~~~~~~~~~~~~~~
 
-* `#16`_: Task#run() method receives Wheelie global options
+* `#16`_: ``Task#run()`` method receives Wheelie global options
 * `#17`_: ``noop`` helper that disables a plugin
 
 .. _#16: https://github.com/palazzem/wheelie/issues/16
