@@ -218,6 +218,11 @@ Wheelie is released under the terms of the **BSD LICENSE**. Full details in ``LI
 Changelog
 ---------
 
+0.1.4 [2016-04-15]
+~~~~~~~~~~~~~~~~~~
+
+* Updating all dependencies
+
 0.1.3 [2015-08-12]
 ~~~~~~~~~~~~~~~~~~
 
