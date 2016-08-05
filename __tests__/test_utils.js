@@ -3,84 +3,65 @@ var utils = require('../lib/utils');
 
 
 describe('Utilities:', function() {
-  describe('mandatory', function() {
-    it('should return the field if it\'s not undefined', function() {
-      var field;
-      var fn = function() { field = utils.mandatory('ok'); };
-      expect(fn).not.toThrow();
-      expect(field).toEqual('ok');
+  describe('isSet', function() {
+    it('should return true if it\'s not undefined', function() {
+      var check = utils.isSet('ok');
+      expect(check).toBe(true);
     });
 
-    it('should throw an error if field is undefined', function() {
-      var field;
-      var fn = function() { field = utils.mandatory(undefined); };
-      // FIXME: check if it's an ``IllegalArgument``
-      expect(fn).toThrow();
+    it('should return false if field is undefined', function() {
+      var check = utils.isSet(undefined);
+      expect(check).toBe(false);
     });
 
-    it('should throw an error if field is null', function() {
-      var field;
-      var fn = function() { field = utils.mandatory(null); };
-      // FIXME: check if it's an ``IllegalArgument``
-      expect(fn).toThrow();
+    it('should return false if field is null', function() {
+      var check = utils.isSet(null);
+      expect(check).toBe(false);
     });
   });
 
   describe('isFunction', function() {
-    it('should return the field if it\'s a function', function() {
+    it('should return true if it\'s a function', function() {
       var fakeFn = function() {};
-      var field;
-
-      var fn = function() { field = utils.isFunction(fakeFn); };
-      expect(fn).not.toThrow();
-      expect(field).toEqual(fakeFn);
+      var check = utils.isFunction(fakeFn);
+      expect(check).toBe(true);
     });
 
-    it('should not throw an error if field is undefined', function() {
-      var field;
-      var fn = function() { field = utils.isFunction(undefined); };
-      expect(fn).not.toThrow();
+    it('should return false if field is undefined', function() {
+      var check = utils.isFunction(undefined);
+      expect(check).toBe(false);
     });
 
-    it('should not throw an error if field is null', function() {
-      var field;
-      var fn = function() { field = utils.isFunction(null); };
-      expect(fn).not.toThrow();
+    it('should return false if field is null', function() {
+      var check = utils.isFunction(null);
+      expect(check).toBe(false);
     });
 
-    it('should throw an error if field is not a function', function() {
-      var field;
-      var fn = function() { field = utils.isFunction('wrong'); };
-      expect(fn).toThrow();
+    it('should return false if field is not a function', function() {
+      var check = utils.isFunction('wrong');
+      expect(check).toBe(false);
     });
   });
 
   describe('isArray', function() {
-    it('should return the field if it\'s an array', function() {
-      var field;
-
-      var fn = function() { field = utils.isArray([1, 2]); };
-      expect(fn).not.toThrow();
-      expect(field).toEqual([1, 2]);
+    it('should return true if it\'s an array', function() {
+      var check = utils.isArray([1, 2]);
+      expect(check).toBe(true);
     });
 
-    it('should not throw an error if field is undefined', function() {
-      var field;
-      var fn = function() { field = utils.isArray(undefined); };
-      expect(fn).not.toThrow();
+    it('should return false if field is undefined', function() {
+      var check = utils.isArray(undefined);
+      expect(check).toBe(false);
     });
 
-    it('should not throw an error if field is null', function() {
-      var field;
-      var fn = function() { field = utils.isArray(null); };
-      expect(fn).not.toThrow();
+    it('should return false if field is null', function() {
+      var check = utils.isArray(null);
+      expect(check).toBe(false);
     });
 
-    it('should throw an error if field is not an array', function() {
-      var field;
-      var fn = function() { field = utils.isArray('wrong'); };
-      // FIXME: check if it's an ``IllegalArgument``
-      expect(fn).toThrow();
+    it('should return false if field is not an array', function() {
+      var check = utils.isArray('wrong');
+      expect(check).toBe(false);
     });
   });
 
