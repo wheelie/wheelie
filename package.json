@@ -38,5 +38,9 @@
     "gulp": "3.9.1",
     "jest-cli": "14.1.0",
     "jshint": "2.9.2"
+  },
+  "devEngines": {
+    "node": "4.x || 5.x || 6.x",
+    "npm": "2.x || 3.x"
   }
 }
