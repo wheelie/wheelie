@@ -1,8 +1,8 @@
 var logger = require('../lib/logging/logger');
 
 describe('A Logger', function () {
-  it('should have DEBUG as default write level', function() {
-    expect(logger.getWriteLevel()).to.be.equal('DEBUG');
+  it('should have INFO as default write level', function() {
+    expect(logger.getWriteLevel()).to.be.equal('INFO');
   });
 
   it('should change the write level', function() {
