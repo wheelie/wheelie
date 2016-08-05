@@ -9,7 +9,7 @@ describe('Wheelie', function() {
   beforeEach(function() {
     // initializes Wheelie
     wheelie = new Wheelie();
-    registry = wheelie.registry;
+    registry = wheelie._registry;
     // spy on Registry
     spyOn(registry, 'add');
     spyOn(registry, 'remove');
@@ -22,16 +22,16 @@ describe('Wheelie', function() {
     });
 
     it('should store the gulp reference', function() {
-      expect(wheelie.gulp.tasks).not.toBe(undefined);
-      expect(wheelie.gulp.isRunning).toBe(false);
+      expect(wheelie._gulp.tasks).not.toBe(undefined);
+      expect(wheelie._gulp.isRunning).toBe(false);
     });
 
     it('should store global options', function() {
-      expect(wheelie.options).not.toBe(undefined);
-      expect(wheelie.options.src).toEqual('client/');
-      expect(wheelie.options.build).toEqual('static/');
-      expect(wheelie.options.dist).toEqual('static/');
-      expect(wheelie.options.production).toBe(false);
+      expect(wheelie._options).not.toBe(undefined);
+      expect(wheelie._options.src).toEqual('client/');
+      expect(wheelie._options.build).toEqual('static/');
+      expect(wheelie._options.dist).toEqual('static/');
+      expect(wheelie._options.production).toBe(false);
     });
   });
 
@@ -66,27 +66,27 @@ describe('Wheelie', function() {
   describe('configurations', function() {
     it('should change the "src" folder attribute', function() {
       wheelie.setSrc('new_source');
-      expect(wheelie.options.src).toEqual('new_source');
+      expect(wheelie._options.src).toEqual('new_source');
     });
 
     it('should change the "build" folder attribute', function() {
       wheelie.setBuild('new_destination');
-      expect(wheelie.options.build).toEqual('new_destination');
+      expect(wheelie._options.build).toEqual('new_destination');
     });
 
     it('should change the "dist" folder attribute', function() {
       wheelie.setDist('new_destination');
-      expect(wheelie.options.dist).toEqual('new_destination');
+      expect(wheelie._options.dist).toEqual('new_destination');
     });
 
     it('should return the "static" folder if production flag is false', function() {
-      var out = wheelie.getDest();
+      var out = wheelie._getDest();
       expect(out).toEqual('static/');
     });
 
     it('should return the "static" folder if production flag is true', function() {
-      wheelie.options.production = true;
-      var out = wheelie.getDest();
+      wheelie._options.production = true;
+      var out = wheelie._getDest();
       expect(out).toEqual('static/');
     });
   });

@@ -10,7 +10,7 @@ describe('Wheelie,', function() {
     // initializes Wheelie
     wheelie = new Wheelie();
     // spy on Gulp
-    spyOn(wheelie.gulp, 'task');
+    spyOn(wheelie._gulp, 'task');
   });
 
   it('should inject all registered tasks with their callbacks into the Gulp registry', function() {
@@ -23,8 +23,8 @@ describe('Wheelie,', function() {
     wheelie.add([task, anotherTask]);
     wheelie.build();
 
-    firstCall = wheelie.gulp.task.calls.argsFor(0);
-    secondCall = wheelie.gulp.task.calls.argsFor(1);
+    firstCall = wheelie._gulp.task.calls.argsFor(0);
+    secondCall = wheelie._gulp.task.calls.argsFor(1);
     expect(firstCall).toEqual(['task', [], gulpTask]);
     expect(secondCall).toEqual(['task_2', ['task'], gulpTask]);
   });
@@ -35,7 +35,7 @@ describe('Wheelie,', function() {
     wheelie.add(task);
     wheelie.build();
 
-    expect(wheelie.gulp.task).toHaveBeenCalledWith('task', [], undefined);
+    expect(wheelie._gulp.task).toHaveBeenCalledWith('task', [], undefined);
   });
 
   describe('tasks configuration loader', function() {
@@ -60,11 +60,11 @@ describe('Wheelie,', function() {
       wheelie.add(task);
       wheelie.build();
 
-      expect(config).toHaveBeenCalledWith(wheelie.options);
+      expect(config).toHaveBeenCalledWith(wheelie._options);
     });
 
     it('should provide a "dest" folder according to production status', function() {
-      spyOn(wheelie, 'getDest').and.returnValue('something');
+      spyOn(wheelie, '_getDest').and.returnValue('something');
 
       var emptyFn = function() {};
       var config = jasmine.createSpy();
@@ -76,7 +76,7 @@ describe('Wheelie,', function() {
 
       var passedSettings = config.calls.argsFor(0)[0];
 
-      expect(wheelie.getDest.calls.count()).toBe(1);
+      expect(wheelie._getDest.calls.count()).toBe(1);
       expect(passedSettings.dest).not.toBe(undefined);
     });
 
@@ -112,7 +112,7 @@ describe('Wheelie,', function() {
       wheelie.build();
 
       args = run.calls.argsFor(0);
-      expect(args[0]).toEqual(wheelie.gulp);
+      expect(args[0]).toEqual(wheelie._gulp);
       expect(args[1]).toEqual({'key': 'value', 'patch': 'applied'});
     });
 
@@ -129,27 +129,27 @@ describe('Wheelie,', function() {
       wheelie.build();
 
       args = run.calls.argsFor(0);
-      expect(args[0]).toEqual(wheelie.gulp);
+      expect(args[0]).toEqual(wheelie._gulp);
       expect(args[1]).toEqual({'key': 'changed', 'patch': 'applied'});
     });
 
     it('should pass the gulp instance to the run() callback', function() {
       var run = jasmine.createSpy();
-      var config = function() { return object; };
       var object = {'key': 'value'};
+      var config = function() { return object; };
 
       var task = new Task('task', [], run, config);
       wheelie.add(task);
       wheelie.build();
 
       args = run.calls.argsFor(0);
-      expect(args[0]).toEqual(wheelie.gulp);
+      expect(args[0]).toEqual(wheelie._gulp);
     });
 
     it('should pass the config() object to the run() callback', function() {
       var run = jasmine.createSpy();
-      var config = function() { return object; };
       var object = {'key': 'value'};
+      var config = function() { return object; };
 
       var task = new Task('task', [], run, config);
       wheelie.add(task);
@@ -161,15 +161,15 @@ describe('Wheelie,', function() {
 
     it('should pass the Wheelie global options to the run() callback', function() {
       var run = jasmine.createSpy();
-      var config = function() { return object; };
       var object = {'key': 'value'};
+      var config = function() { return object; };
 
       var task = new Task('task', [], run, config);
       wheelie.add(task);
       wheelie.build();
 
       args = run.calls.argsFor(0);
-      expect(args[2]).toEqual(wheelie.options);
+      expect(args[2]).toEqual(wheelie._options);
     });
   });
 });
