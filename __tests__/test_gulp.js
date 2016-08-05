@@ -4,23 +4,17 @@ var Task = require('../lib/models/task');
 
 
 describe('Wheelie,', function() {
-  var wheelie;
-  var sandbox = sinon.sandbox;
+  var wheelie = null;
 
   beforeEach(function() {
-    // initializes Wheelie with a stubbed Gulp
+    // initializes Wheelie
     wheelie = new Wheelie();
-
-    sandbox.create();
-    sandbox.stub(wheelie.gulp, 'task');
-  });
-
-  afterEach(function() {
-    sandbox.restore();
+    // spy on Gulp
+    spyOn(wheelie.gulp, 'task');
   });
 
   it('should inject all registered tasks with their callbacks into the Gulp registry', function() {
-    var gulpTask = sandbox.stub();
+    var gulpTask = jasmine.createSpy();
     var run = function() { return gulpTask; };
 
     var task = new Task('task', [], run);
@@ -29,10 +23,10 @@ describe('Wheelie,', function() {
     wheelie.add([task, anotherTask]);
     wheelie.build();
 
-    firstCall = wheelie.gulp.task.getCall(0);
-    secondCall = wheelie.gulp.task.getCall(1);
-    expect(firstCall.calledWith('task', [], gulpTask)).to.be.true;
-    expect(secondCall.calledWith('task_2', ['task'], gulpTask)).to.be.true;
+    firstCall = wheelie.gulp.task.calls.argsFor(0);
+    secondCall = wheelie.gulp.task.calls.argsFor(1);
+    expect(firstCall).toEqual(['task', [], gulpTask]);
+    expect(secondCall).toEqual(['task_2', ['task'], gulpTask]);
   });
 
   it('should register the Gulp task that doesn\'t have a run() callback', function() {
@@ -41,62 +35,59 @@ describe('Wheelie,', function() {
     wheelie.add(task);
     wheelie.build();
 
-    gulpTask = wheelie.gulp.task.getCall(0);
-    expect(gulpTask.calledWith('task', [], undefined)).to.be.true;
+    expect(wheelie.gulp.task).toHaveBeenCalledWith('task', [], undefined);
   });
 
   describe('tasks configuration loader', function() {
     it('should call the config() callback for each task', function() {
       var emptyFn = function() {};
-      var config = sandbox.stub();
+      var config = jasmine.createSpy();
 
       var task = new Task('task', [], emptyFn, config);
 
       wheelie.add(task);
       wheelie.build();
 
-      expect(config.calledOnce).to.be.true;
+      expect(config.calls.count()).toBe(1);
     });
 
     it('should pass the global settings to each task config() callback', function() {
       var emptyFn = function() {};
-      var config = sandbox.stub();
+      var config = jasmine.createSpy();
 
       var task = new Task('task', [], emptyFn, config);
 
       wheelie.add(task);
       wheelie.build();
 
-      expect(config.calledWith(wheelie.options)).to.be.true;
+      expect(config).toHaveBeenCalledWith(wheelie.options);
     });
 
     it('should provide a "dest" folder according to production status', function() {
-      var spy = sandbox.spy(wheelie, "getDest");
+      spyOn(wheelie, 'getDest').and.returnValue('something');
 
       var emptyFn = function() {};
-      var config = sandbox.stub();
+      var config = jasmine.createSpy();
 
       var task = new Task('task', [], emptyFn, config);
 
       wheelie.add(task);
       wheelie.build();
 
-      var passedSettings = config.getCall(0).args[0];
+      var passedSettings = config.calls.argsFor(0)[0];
 
-      expect(spy.calledOnce).to.be.true;
-      expect(passedSettings.dest).to.be.not.undefined;
+      expect(wheelie.getDest.calls.count()).toBe(1);
+      expect(passedSettings.dest).not.toBe(undefined);
     });
 
     it('should prevent global settings pollution between plugins execution', function() {
-      var gulpTask = sandbox.stub();
-      var run = function() { return gulpTask; };
+      var run = function() { return jasmine.createSpy(); };
+      var goodConfig = jasmine.createSpy();
 
       var maliciousConfig = function(globals) {
         globals.dest = '/';
         return {};
       }
-
-      var goodConfig = sandbox.stub();
 
       var task = new Task('task', [], run, maliciousConfig);
       var anotherTask = new Task('task_2', ['task'], run, goodConfig);
@@ -104,14 +95,14 @@ describe('Wheelie,', function() {
       wheelie.add([task, anotherTask]);
       wheelie.build();
 
-      var passedSettings = goodConfig.getCall(0).args[0];
-      expect(passedSettings.dest).to.be.not.equal('/');
+      var passedSettings = goodConfig.calls.argsFor(0)[0];
+      expect(passedSettings.dest).not.toEqual('/');
     });
   });
 
   describe('tasks executor', function() {
     it('should apply a patch to the generated config() object', function() {
-      var run = sandbox.stub();
+      var run = jasmine.createSpy();
       var config = function() { return {'key': 'value'}; };
       var patch = {'patch': 'applied'};
 
@@ -120,13 +111,13 @@ describe('Wheelie,', function() {
       wheelie.update('task', patch);
       wheelie.build();
 
-      args = run.getCall(0).args;
-      expect(args[0]).to.be.eql(wheelie.gulp);
-      expect(args[1]).to.be.eql({'key': 'value', 'patch': 'applied'});
+      args = run.calls.argsFor(0);
+      expect(args[0]).toEqual(wheelie.gulp);
+      expect(args[1]).toEqual({'key': 'value', 'patch': 'applied'});
     });
 
     it('should apply all patches to the generated config() object', function() {
-      var run = sandbox.stub();
+      var run = jasmine.createSpy();
       var config = function() { return {'key': 'value'}; };
       var firstPatch = {'patch': 'applied'};
       var secondPatch = {'key': 'changed'};
@@ -137,13 +128,13 @@ describe('Wheelie,', function() {
       wheelie.update('task', secondPatch);
       wheelie.build();
 
-      args = run.getCall(0).args;
-      expect(args[0]).to.be.eql(wheelie.gulp);
-      expect(args[1]).to.be.eql({'key': 'changed', 'patch': 'applied'});
+      args = run.calls.argsFor(0);
+      expect(args[0]).toEqual(wheelie.gulp);
+      expect(args[1]).toEqual({'key': 'changed', 'patch': 'applied'});
     });
 
     it('should pass the gulp instance to the run() callback', function() {
-      var run = sandbox.stub();
+      var run = jasmine.createSpy();
       var config = function() { return object; };
       var object = {'key': 'value'};
 
@@ -151,12 +142,12 @@ describe('Wheelie,', function() {
       wheelie.add(task);
       wheelie.build();
 
-      args = run.getCall(0).args;
-      expect(args[0]).to.be.eql(wheelie.gulp);
+      args = run.calls.argsFor(0);
+      expect(args[0]).toEqual(wheelie.gulp);
     });
 
     it('should pass the config() object to the run() callback', function() {
-      var run = sandbox.stub();
+      var run = jasmine.createSpy();
       var config = function() { return object; };
       var object = {'key': 'value'};
 
@@ -164,12 +155,12 @@ describe('Wheelie,', function() {
       wheelie.add(task);
       wheelie.build();
 
-      args = run.getCall(0).args;
-      expect(args[1]).to.be.eql(object);
+      args = run.calls.argsFor(0);
+      expect(args[1]).toEqual(object);
     });
 
     it('should pass the Wheelie global options to the run() callback', function() {
-      var run = sandbox.stub();
+      var run = jasmine.createSpy();
       var config = function() { return object; };
       var object = {'key': 'value'};
 
@@ -177,8 +168,8 @@ describe('Wheelie,', function() {
       wheelie.add(task);
       wheelie.build();
 
-      args = run.getCall(0).args;
-      expect(args[2]).to.be.eql(wheelie.options);
+      args = run.calls.argsFor(0);
+      expect(args[2]).toEqual(wheelie.options);
     });
   });
 });

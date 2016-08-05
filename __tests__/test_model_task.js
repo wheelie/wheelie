@@ -5,51 +5,55 @@ describe('Task model', function() {
   describe('has mandatory fields', function() {
     it('should fail to initialize if the name is missing', function() {
       var fn = function() { new Task(undefined) };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should fail to initialize if the dependencies are missing', function() {
       var fn = function() { new Task('name', undefined) };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should fail to initialize if the run argument isn\'t a function', function() {
       var fn = function() { new Task('name', [], "not_a_function") };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should fail if config() is not a function', function() {
       var task;
 
       var fn = function() { task = new Task('name', [], function() {}, {'key': 'value'}) };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should return an undefined reference when calling the "super class" run() method', function() {
       var task = new Task('name', []);
-      expect(task.run()).to.be.undefined;
+      expect(task.run()).toBe(undefined);
     });
 
     it('should work with valid arguments but without run() function', function() {
       var task;
 
       var fn = function() { task = new Task('name', []) };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(task.name).to.be.equal('name');
-      expect(task.dependencies).to.be.eql([]);
-      expect(typeof task.run).to.be.equal('function');
-      expect(task.config()).to.be.eql({});
+      expect(fn).not.toThrow();
+      expect(task.name).toEqual('name');
+      expect(task.dependencies).toEqual([]);
+      expect(typeof task.run).toEqual('function');
+      expect(task.config()).toEqual({});
     });
 
     it('should work with valid arguments but without config() function', function() {
       var task;
 
       var fn = function() { task = new Task('name', [], function() {}) };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(task.name).to.be.equal('name');
-      expect(task.dependencies).to.be.eql([]);
-      expect(typeof task.run).to.be.equal('function');
-      expect(task.config()).to.be.eql({});
+      expect(fn).not.toThrow();
+      expect(task.name).toEqual('name');
+      expect(task.dependencies).toEqual([]);
+      expect(typeof task.run).toEqual('function');
+      expect(task.config()).toEqual({});
     });
 
     it('should work with valid arguments', function() {
@@ -57,12 +61,12 @@ describe('Task model', function() {
 
       var config = function() { return {'key': 'value'} };
       var fn = function() { task = new Task('name', [], function() {}, config) };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(task.name).to.be.equal('name');
-      expect(task.dependencies).to.be.eql([]);
-      expect(typeof task.run).to.be.equal('function');
-      expect(typeof task.config).to.be.equal('function');
-      expect(task.config()).to.be.eql({'key': 'value'});
+      expect(fn).not.toThrow();
+      expect(task.name).toEqual('name');
+      expect(task.dependencies).toEqual([]);
+      expect(typeof task.run).toEqual('function');
+      expect(typeof task.config).toEqual('function');
+      expect(task.config()).toEqual({'key': 'value'});
     });
   });
 });

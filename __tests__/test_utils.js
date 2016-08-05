@@ -7,20 +7,22 @@ describe('Utilities:', function() {
     it('should return the field if it\'s not undefined', function() {
       var field;
       var fn = function() { field = utils.mandatory('ok'); };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(field).to.be.equal('ok');
+      expect(fn).not.toThrow();
+      expect(field).toEqual('ok');
     });
 
     it('should throw an error if field is undefined', function() {
       var field;
       var fn = function() { field = utils.mandatory(undefined); };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should throw an error if field is null', function() {
       var field;
       var fn = function() { field = utils.mandatory(null); };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
   });
 
@@ -30,26 +32,26 @@ describe('Utilities:', function() {
       var field;
 
       var fn = function() { field = utils.isFunction(fakeFn); };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(field).to.be.equal(fakeFn);
+      expect(fn).not.toThrow();
+      expect(field).toEqual(fakeFn);
     });
 
     it('should not throw an error if field is undefined', function() {
       var field;
       var fn = function() { field = utils.isFunction(undefined); };
-      expect(fn).to.not.throw('IllegalArgument');
+      expect(fn).not.toThrow();
     });
 
     it('should not throw an error if field is null', function() {
       var field;
       var fn = function() { field = utils.isFunction(null); };
-      expect(fn).to.not.throw('IllegalArgument');
+      expect(fn).not.toThrow();
     });
 
     it('should throw an error if field is not a function', function() {
       var field;
       var fn = function() { field = utils.isFunction('wrong'); };
-      expect(fn).to.throw('IllegalArgument');
+      expect(fn).toThrow();
     });
   });
 
@@ -58,26 +60,27 @@ describe('Utilities:', function() {
       var field;
 
       var fn = function() { field = utils.isArray([1, 2]); };
-      expect(fn).to.not.throw('IllegalArgument');
-      expect(field).to.be.eql([1, 2]);
+      expect(fn).not.toThrow();
+      expect(field).toEqual([1, 2]);
     });
 
     it('should not throw an error if field is undefined', function() {
       var field;
       var fn = function() { field = utils.isArray(undefined); };
-      expect(fn).to.not.throw('IllegalArgument');
+      expect(fn).not.toThrow();
     });
 
     it('should not throw an error if field is null', function() {
       var field;
       var fn = function() { field = utils.isArray(null); };
-      expect(fn).to.not.throw('IllegalArgument');
+      expect(fn).not.toThrow();
     });
 
     it('should throw an error if field is not an array', function() {
       var field;
       var fn = function() { field = utils.isArray('wrong'); };
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
   });
 
@@ -87,7 +90,7 @@ describe('Utilities:', function() {
       var updateObj = { 'foo': 'bar' };
 
       var newObj = utils.extend({}, oldObj, updateObj);
-      expect(newObj).to.be.deep.eql({'foo': 'bar', 'bar': 'foo'});
+      expect(newObj).toEqual({'foo': 'bar', 'bar': 'foo'});
     });
 
     it('should deep merge two JavaScript objects in a new one, updating their values', function() {
@@ -95,7 +98,7 @@ describe('Utilities:', function() {
       var updateObj = {'settings': {'foo': 'bar'}};
 
       var newObj = utils.extend({}, oldObj, updateObj);
-      expect(newObj).to.be.deep.eql({'settings': {'foo': 'bar'}});
+      expect(newObj).toEqual({'settings': {'foo': 'bar'}});
     });
 
     it('should deep merge two JavaScript objects in a new one, updating even arrays', function() {
@@ -103,7 +106,7 @@ describe('Utilities:', function() {
       var updateObj = {'settings': {'foo': ['with_bar']}};
 
       var newObj = utils.extend({}, oldObj, updateObj);
-      expect(newObj).to.be.deep.eql({'settings': {'foo': ['with_bar']}});
+      expect(newObj).toEqual({'settings': {'foo': ['with_bar']}});
     });
 
     it('should deep merge two JavaScript objects replacing the old one, updating their values', function() {
@@ -111,7 +114,7 @@ describe('Utilities:', function() {
       var updateObj = {'settings': {'foo': 'bar'}};
 
       var newObj = utils.extend(oldObj, updateObj);
-      expect(newObj).to.be.deep.eql({'settings': {'foo': 'bar'}});
+      expect(newObj).toEqual({'settings': {'foo': 'bar'}});
     });
   });
 });

@@ -197,18 +197,15 @@ A working `wheelie-recipe`_ is also available.
 Testing
 -------
 
-We use `Testem`_ as a test runner. Install all development dependencies and launch Testem
-in continuous integration mode:
+We use `Jest`_ as a test framework. Install all development dependencies and launch the test
+suite:
 
 .. code-block:: bash
 
     $ npm install
-    $ npm run test     # (launches testem in CI mode)
-    $ npm run test:tdd # (uses testem TDD mode)
-    $ npm run jshint   # (linting)
+    $ npm test
 
-
-.. _Testem: https://github.com/airportyh/testem
+.. _Jest: https://facebook.github.io/jest/
 
 License
 -------

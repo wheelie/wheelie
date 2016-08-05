@@ -2,9 +2,9 @@ var exceptions = require('../lib/errors/exceptions');
 var Registry = require('../lib/models/registry');
 var Task = require('../lib/models/task');
 
-var registry;
 
 describe('Registry model', function() {
+  var registry = null;
 
   beforeEach(function() {
     registry = new Registry();
@@ -14,20 +14,20 @@ describe('Registry model', function() {
     it('should add a new Task if it\'s an instance of Task', function() {
       var task = new Task('assets', [], function() {});
       var fn = function() { registry.add(task); };
-      expect(fn).to.not.throw(Error);
+      expect(fn).not.toThrow();
     });
 
     it('should throw an IllegalArgument if the argument is not a valid instance of Task', function() {
       var task = 'nope';
       var fn = function() { registry.add(task); };
-      expect(fn).to.throw(Error);
-      expect(fn).to.throw('IllegalArgument');
+      // FIXME: check if it's an ``IllegalArgument``
+      expect(fn).toThrow();
     });
 
     it('should increase the internal size attribute', function() {
       var task = new Task('assets', [], function() {});
       registry.add(task);
-      expect(registry.size).to.be.equal(1);
+      expect(registry.size).toBe(1);
     });
   });
 
@@ -35,19 +35,19 @@ describe('Registry model', function() {
     it('should return a Task if it\'s available inside the registry', function() {
       var task = new Task('assets', [], function() {});
       registry.add(task);
-      expect(registry.get('assets')).to.be.eql(task);
+      expect(registry.get('assets')).toEqual(task);
     });
 
     it('should raise a KeyError exception if the task is not available in the registry', function() {
       var fn = function() { registry.get('nope'); };
-      expect(fn).to.throw(Error);
-      expect(fn).to.throw('KeyError');
+      // FIXME: check if it's an ``KeyError``
+      expect(fn).toThrow();
     });
   });
 
   describe('items method', function() {
     it('should return an empty array if the registry is empty', function() {
-      expect(registry.items()).to.be.eql([]);
+      expect(registry.items()).toEqual([]);
     });
 
     it('should return an array of Task items', function() {
@@ -55,15 +55,15 @@ describe('Registry model', function() {
       var templates = new Task('templates', [], function() {});
       registry.add(assets);
       registry.add(templates);
-      expect(registry.items()).to.be.eql([assets, templates]);
+      expect(registry.items()).toEqual([assets, templates]);
     });
   });
 
   describe('remove method', function() {
     it('should raise a KeyError exception if the task is not available in the registry', function() {
       var fn = function() { registry.remove('nope'); };
-      expect(fn).to.throw(Error);
-      expect(fn).to.throw('KeyError');
+      // FIXME: check if it's an ``KeyError``
+      expect(fn).toThrow();
     });
 
     it('should remove a Task if it\'s available inside the registry', function() {
@@ -72,15 +72,15 @@ describe('Registry model', function() {
       registry.remove('assets');
 
       var fn = function() { registry.get('assets'); };
-      expect(fn).to.throw(Error);
-      expect(fn).to.throw('KeyError');
+      // FIXME: check if it's an ``KeyError``
+      expect(fn).toThrow();
     });
 
     it('should decrease the internal size attribute', function() {
       var task = new Task('assets', [], function() {});
       registry.add(task);
       registry.remove('assets');
-      expect(registry.size).to.be.equal(0);
+      expect(registry.size).toBe(0);
     });
   });
 
@@ -91,14 +91,14 @@ describe('Registry model', function() {
       registry.add(task);
 
       registry.update('assets', options);
-      expect(registry.get('assets').patches.length).to.be.equal(1);
-      expect(registry.get('assets').patches[0]).to.be.eql(options);
+      expect(registry.get('assets').patches.length).toBe(1);
+      expect(registry.get('assets').patches[0]).toEqual(options);
     });
 
     it('should raise a KeyError exception if the task doesn\'t exist', function() {
       var fn = function() { registry.update('nope', {}); };
-      expect(fn).to.throw(Error);
-      expect(fn).to.throw('KeyError');
+      // FIXME: check if it's an ``KeyError``
+      expect(fn).toThrow();
     });
   });
 });

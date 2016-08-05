@@ -6,9 +6,11 @@
   "scripts": {
     "start": "node index.js",
     "pretest": "npm run jshint",
-    "test": "node_modules/testem/testem.js ci",
-    "test:tdd": "node_modules/testem/testem.js",
+    "test": "node_modules/jest-cli/bin/jest.js",
     "jshint": "node_modules/jshint/bin/jshint lib/**/*.js"
+  },
+  "jest": {
+    "automock": false
   },
   "repository": {
     "type": "git",
@@ -33,11 +35,8 @@
     "yargs": "4.8.1"
   },
   "devDependencies": {
-    "chai": "3.5.0",
     "gulp": "3.9.1",
-    "jshint": "2.9.2",
-    "mocha": "3.0.1",
-    "sinon": "1.17.5",
-    "testem": "1.10.2"
+    "jest-cli": "14.1.0",
+    "jshint": "2.9.2"
   }
 }
