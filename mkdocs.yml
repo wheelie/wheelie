@@ -1,0 +1,10 @@
+site_name: Wheelie
+theme: readthedocs
+repo_url: https://github.com/palazzem/wheelie
+site_description: Small but efficient frontend toolchain, built on top of Gulp and insipired by Frigate
+site_author: Emanuele Palazzetti
+pages:
+    - 'Overview': 'index.md'
+    - 'Getting started': 'usage.md'
+    - 'Recipes and tasks': 'recipes.md'
+    - 'Changelog': 'changelog.md'
