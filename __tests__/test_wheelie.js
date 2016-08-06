@@ -88,21 +88,6 @@ describe('Wheelie', function() {
       expect(wheelie._gulp.task).toBeCalledWith('default', ['watch']);
     });
 
-    it('should change the "src" folder attribute', function() {
-      wheelie.setSrc('new_source');
-      expect(wheelie._options.src).toEqual('new_source');
-    });
-
-    it('should change the "build" folder attribute', function() {
-      wheelie.setBuild('new_destination');
-      expect(wheelie._options.build).toEqual('new_destination');
-    });
-
-    it('should change the "dist" folder attribute', function() {
-      wheelie.setDist('new_destination');
-      expect(wheelie._options.dist).toEqual('new_destination');
-    });
-
     it('should return the "static" folder if production flag is false', function() {
       var out = wheelie._getDest();
       expect(out).toEqual('static/');
