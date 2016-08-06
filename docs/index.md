@@ -8,7 +8,7 @@ Small but efficient frontend toolchain, built on top of [Gulp][gulp].
 
 If you need support, please use the [GitHub issue tracker][1].
 
-[1]: https://github.com/palazzem/wheelie/issues
+[1]: https://github.com/wheelie/wheelie/issues
 
 # Contributing
 

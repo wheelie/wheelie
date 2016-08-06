@@ -2,20 +2,20 @@
 Wheelie
 =======
 
-.. image:: https://travis-ci.org/palazzem/wheelie.svg
-    :target: https://travis-ci.org/palazzem/wheelie
+.. image:: https://travis-ci.org/wheelie/wheelie.svg
+    :target: https://travis-ci.org/wheelie/wheelie
     :alt: Build Status
 
-.. image:: https://codecov.io/gh/palazzem/wheelie/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/palazzem/wheelie
+.. image:: https://codecov.io/gh/wheelie/wheelie/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/wheelie/wheelie
     :alt: Coverage Status
 
-.. image:: https://david-dm.org/palazzem/wheelie.svg
-    :target: https://david-dm.org/palazzem/wheelie
+.. image:: https://david-dm.org/wheelie/wheelie.svg
+    :target: https://david-dm.org/wheelie/wheelie
     :alt: Dependency Status
 
-.. image:: https://david-dm.org/palazzem/wheelie/dev-status.svg
-    :target: https://david-dm.org/palazzem/wheelie#info=devDependencies
+.. image:: https://david-dm.org/wheelie/wheelie/dev-status.svg
+    :target: https://david-dm.org/wheelie/wheelie#info=devDependencies
     :alt: Dev Dependency Status
 
 Small but efficient frontend toolchain, built on top of `Gulp`_.
@@ -27,7 +27,7 @@ Support
 
 If you need support, please use the `GitHub issue tracker`_.
 
-.. _GitHub issue tracker: https://github.com/palazzem/wheelie/issues
+.. _GitHub issue tracker: https://github.com/wheelie/wheelie/issues
 
 Contributing
 ------------
@@ -100,7 +100,7 @@ Official recipes
 our way to write frontend applications, but just to inspire and enforce a community-driven way to write
 Wheelie recipes.
 
-.. _wheelie-recipe: https://github.com/palazzem/wheelie-recipe
+.. _wheelie-recipe: https://github.com/wheelie/wheelie-recipe
 
 Testing
 -------

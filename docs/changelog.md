@@ -14,8 +14,8 @@
 * [#16][16]: ``Task#run()`` method receives Wheelie global options
 * [#17][17]: ``noop`` helper that disables a plugin
 
-[16]: https://github.com/palazzem/wheelie/issues/16
-[17]: https://github.com/palazzem/wheelie/issues/17
+[16]: https://github.com/wheelie/wheelie/issues/16
+[17]: https://github.com/wheelie/wheelie/issues/17
 
 ## 0.1.1 [2015-08-07]
 

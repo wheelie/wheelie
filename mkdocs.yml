@@ -1,6 +1,6 @@
 site_name: Wheelie
 theme: readthedocs
-repo_url: https://github.com/palazzem/wheelie
+repo_url: https://github.com/wheelie/wheelie
 site_description: Small but efficient frontend toolchain, built on top of Gulp and insipired by Frigate
 site_author: Emanuele Palazzetti
 pages:
