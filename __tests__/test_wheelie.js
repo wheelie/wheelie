@@ -82,6 +82,12 @@ describe('Wheelie', function() {
   });
 
   describe('configurations', function() {
+    it('should set the default task when gulp is launched', function() {
+      wheelie._gulp.task = jest.fn();
+      wheelie.setDefault('watch');
+      expect(wheelie._gulp.task).toBeCalledWith('default', ['watch']);
+    });
+
     it('should change the "src" folder attribute', function() {
       wheelie.setSrc('new_source');
       expect(wheelie._options.src).toEqual('new_source');

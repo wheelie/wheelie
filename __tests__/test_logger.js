@@ -65,4 +65,47 @@ describe('A Logger', function () {
       expect(logger.writeIsEnabled('ERROR')).toBe(false);
     });
   });
+
+  describe('writing functions', function() {
+    var _console = null;
+
+    beforeEach(function() {
+      // mock the console
+      _console = console;
+      console = jest.fn();
+      console.log = jest.fn();
+      console.info = jest.fn();
+      console.warn = jest.fn();
+      console.error = jest.fn();
+    });
+
+    afterEach(function() {
+      // unmock the console
+      console = _console;
+    });
+
+    it('should write a DEBUG message', function() {
+      logger.setWriteLevel('DEBUG');
+      logger.debug('debug');
+      expect(console.log).toBeCalled();
+    });
+
+    it('should write an INFO message', function() {
+      logger.setWriteLevel('INFO');
+      logger.info('info');
+      expect(console.info).toBeCalled();
+    });
+
+    it('should write a WARNING message', function() {
+      logger.setWriteLevel('WARNING');
+      logger.warning('warning');
+      expect(console.warn).toBeCalled();
+    });
+
+    it('should write an ERROR message', function() {
+      logger.setWriteLevel('ERROR');
+      logger.error('error');
+      expect(console.error).toBeCalled();
+    });
+  });
 });
