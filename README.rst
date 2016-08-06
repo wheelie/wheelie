@@ -6,6 +6,10 @@ Wheelie
     :target: https://travis-ci.org/palazzem/wheelie
     :alt: Build Status
 
+.. image:: https://codecov.io/gh/palazzem/wheelie/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/palazzem/wheelie
+    :alt: Coverage Status
+
 .. image:: https://david-dm.org/palazzem/wheelie.svg
     :target: https://david-dm.org/palazzem/wheelie
     :alt: Dependency Status
