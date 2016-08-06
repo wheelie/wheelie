@@ -29,8 +29,8 @@ improving your automated workflow. It ships out of the box with:
 * A ``Task`` model to create custom tasks like you usually do with Gulp. The programmatic
   interface exposes a configuration callback so that other developers may re-use your
   task, overriding your defaults.
-* ``Task``s can be grouped together to create a **recipe**. Your frontend toolchain
-  becomes a list of Gulp ``Task``s and it can be versioned in a different repository.
+* Tasks can be grouped together to create a **recipe**. Your frontend toolchain
+  becomes a list of Gulp tasks and it can be versioned in a different repository.
   If you publish your recipe into ``npm``, you can update your projects' toolchain with
   just a change in the project's ``package.json``.
 * Nothing less that Gulp already offers you. Wheelie takes care about the Gulp configuration
