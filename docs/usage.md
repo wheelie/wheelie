@@ -70,3 +70,26 @@ To update the configuration above, simply pass an ``options`` object to the Whee
   }
   var wheelie = new Wheelie(options);
 ```
+
+# Wheelie reload
+
+Because Wheelie makes easy to update your tasks configuration, it's usual that you have to restart
+Gulp many times. Because we're developers and we're lazy, it's a good idea using an external tool
+such as [nodemon][nodemon]. In this way, you can add a ``scripts`` entry in your ``package.json``:
+
+```javascript
+  "scripts": {
+    "wheelie": "nodemon --watch gulpfile.js --exec gulp",
+  },
+```
+
+In your shell, just:
+
+```bash
+$ npm run wheelie
+```
+
+More instructions in the [nodemon documentation][docs].
+
+[nodemon]: http://nodemon.io/
+[docs]: https://github.com/remy/nodemon
