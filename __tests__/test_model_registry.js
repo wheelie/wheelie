@@ -12,6 +12,11 @@ describe('Registry model', function() {
     registry = new Registry();
   });
 
+  it('should have initialized status variables', function() {
+    expect(registry.list).toEqual({});
+    expect(registry.size).toBe(0);
+  });
+
   describe('add method', function() {
     it('should add a new Task if it\'s an instance of Task', function() {
       var task = new Task('assets', [], function() {});
