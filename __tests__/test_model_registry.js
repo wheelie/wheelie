@@ -1,4 +1,6 @@
-var exceptions = require('../lib/errors/exceptions');
+var IllegalArgument = require('../lib/errors/exceptions').IllegalArgument;
+var KeyError = require('../lib/errors/exceptions').KeyError;
+
 var Registry = require('../lib/models/registry');
 var Task = require('../lib/models/task');
 
@@ -20,8 +22,7 @@ describe('Registry model', function() {
     it('should throw an IllegalArgument if the argument is not a valid instance of Task', function() {
       var task = 'nope';
       var fn = function() { registry.add(task); };
-      // FIXME: check if it's an ``IllegalArgument``
-      expect(fn).toThrow();
+      expect(fn).toThrowError(IllegalArgument);
     });
 
     it('should increase the internal size attribute', function() {
@@ -40,8 +41,7 @@ describe('Registry model', function() {
 
     it('should raise a KeyError exception if the task is not available in the registry', function() {
       var fn = function() { registry.get('nope'); };
-      // FIXME: check if it's an ``KeyError``
-      expect(fn).toThrow();
+      expect(fn).toThrowError(KeyError);
     });
   });
 
@@ -62,8 +62,7 @@ describe('Registry model', function() {
   describe('remove method', function() {
     it('should raise a KeyError exception if the task is not available in the registry', function() {
       var fn = function() { registry.remove('nope'); };
-      // FIXME: check if it's an ``KeyError``
-      expect(fn).toThrow();
+      expect(fn).toThrowError(KeyError);
     });
 
     it('should remove a Task if it\'s available inside the registry', function() {
@@ -72,8 +71,7 @@ describe('Registry model', function() {
       registry.remove('assets');
 
       var fn = function() { registry.get('assets'); };
-      // FIXME: check if it's an ``KeyError``
-      expect(fn).toThrow();
+      expect(fn).toThrowError(KeyError);
     });
 
     it('should decrease the internal size attribute', function() {
@@ -97,8 +95,7 @@ describe('Registry model', function() {
 
     it('should raise a KeyError exception if the task doesn\'t exist', function() {
       var fn = function() { registry.update('nope', {}); };
-      // FIXME: check if it's an ``KeyError``
-      expect(fn).toThrow();
+      expect(fn).toThrowError(KeyError);
     });
   });
 });
