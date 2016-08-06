@@ -1,4 +1,0 @@
-Authors
-=======
-
-Emanuele Palazzetti
