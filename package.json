@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "pretest": "npm run jshint",
-    "test": "node_modules/jest-cli/bin/jest.js",
+    "test": "node_modules/jest-cli/bin/jest.js --coverage",
     "jshint": "node_modules/jshint/bin/jshint lib/**/*.js"
   },
   "jest": {
