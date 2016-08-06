@@ -26,12 +26,30 @@ describe('Wheelie', function() {
       expect(wheelie._gulp.isRunning).toBe(false);
     });
 
-    it('should store global options', function() {
+    it('should store config defaults', function() {
       expect(wheelie._options).not.toBe(undefined);
+      expect(wheelie._options.writeLevel).toEqual('INFO');
       expect(wheelie._options.src).toEqual('client/');
       expect(wheelie._options.build).toEqual('static/');
       expect(wheelie._options.dist).toEqual('static/');
       expect(wheelie._options.production).toBe(false);
+    });
+
+    it('should accept options during the initialization', function() {
+      var options = {
+        writeLevel: 'WARNING',
+        src: 'src/',
+        build: 'build/',
+        dist: 'dist/'
+      }
+
+      wheelie = new Wheelie(options, 'another_gulp');
+      expect(wheelie._gulp).toEqual('another_gulp');
+      expect(wheelie._options.gulp).toBe(undefined);
+      expect(wheelie._options.writeLevel).toEqual('WARNING');
+      expect(wheelie._options.src).toEqual('src/');
+      expect(wheelie._options.build).toEqual('build/');
+      expect(wheelie._options.dist).toEqual('dist/');
     });
   });
 
