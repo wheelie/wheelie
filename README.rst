@@ -2,6 +2,10 @@
 Wheelie
 =======
 
+.. image:: https://badge.fury.io/js/wheelie.svg
+    :target: https://badge.fury.io/js/wheelie
+    :alt: Latest version
+
 .. image:: https://travis-ci.org/wheelie/wheelie.svg
     :target: https://travis-ci.org/wheelie/wheelie
     :alt: Build Status
