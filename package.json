@@ -1,6 +1,6 @@
 {
   "name": "wheelie",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Small but efficient frontend toolchain, built on top of Gulp and insipired by Frigate",
   "main": "index.js",
   "scripts": {
