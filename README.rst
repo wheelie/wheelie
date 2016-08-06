@@ -6,6 +6,10 @@ Wheelie
     :target: https://badge.fury.io/js/wheelie
     :alt: Latest version
 
+.. image:: https://readthedocs.org/projects/wheelie/badge/?version=latest
+    :target: http://wheelie.readthedocs.io/en/latest/?badge=latest
+    :alt: Documentation Status
+
 .. image:: https://travis-ci.org/wheelie/wheelie.svg
     :target: https://travis-ci.org/wheelie/wheelie
     :alt: Build Status
