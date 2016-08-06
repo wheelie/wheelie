@@ -93,14 +93,12 @@ With the above ``Gulpfile``, you can launch the ``watch`` task simply with:
     $ gulp
     $ gulp watch  # (or)
 
-Examples
---------
+Official recipes
+----------------
 
-You can find a ``gulpfile.js`` example in the ``examples/`` folder. Go into that folder
-and launch ``gulp`` as usual. This initial example will print the current ``Task`` configuration
-together with the ``gulp`` instance object.
-
-A working `wheelie-recipe`_ is also available.
+`wheelie-recipe`_ is a recipe currently maintained by Wheelie core developers. We're not suggesting
+our way to write frontend applications, but just to inspire and enforce a community-driven way to write
+Wheelie recipes.
 
 .. _wheelie-recipe: https://github.com/palazzem/wheelie-recipe
 
