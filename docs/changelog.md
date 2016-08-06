@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 [2016-08-06]
+
+**Bugfixes**
+* fixed [#35][35]: index.js returns a Wheelie instance instead of the constructor
+
+[35]: https://github.com/wheelie/wheelie/issues/35
+
 ## 0.2.0 [2016-08-06]
 
 **Breaking changes**
