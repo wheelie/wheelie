@@ -35,6 +35,15 @@ describe('Registry model', function() {
       registry.add(task);
       expect(registry.size).toBe(1);
     });
+
+    it('should not increase the internal size attribute if the same task is added twice', function() {
+      var task = new Task('assets', [], function() {});
+      // add two tasks with the same name
+      registry.add(task);
+      registry.add(task);
+      // the size must remain the same
+      expect(registry.size).toBe(1);
+    });
   });
 
   describe('get method', function() {
