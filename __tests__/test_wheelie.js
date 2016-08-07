@@ -82,10 +82,10 @@ describe('Wheelie', function() {
   });
 
   describe('configurations', function() {
-    it('should set the default task when gulp is launched', function() {
+    it('should set the default task in Wheelie options', function() {
       wheelie._gulp.task = jest.fn();
       wheelie.setDefault('watch');
-      expect(wheelie._gulp.task).toBeCalledWith('default', ['watch']);
+      expect(wheelie._options.entrypoint).toBe('watch');
     });
 
     it('should return the "static" folder if production flag is false', function() {
