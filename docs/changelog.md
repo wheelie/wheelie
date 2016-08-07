@@ -3,6 +3,7 @@
 ## 0.2.1 [2016-08-06]
 
 **Bugfixes**
+
 * fixed [#35][35]: index.js returns a Wheelie instance instead of the constructor
 
 [35]: https://github.com/wheelie/wheelie/issues/35
@@ -10,9 +11,11 @@
 ## 0.2.0 [2016-08-06]
 
 **Breaking changes**
+
 * issue [#29][29]: updated settings defaults (``writeLevel``, ``build`` and ``dist``)
 
 **Improvements**
+
 * issue [#31][31]: config file is now flat; remove ``logger`` and ``wheelie`` keyword
 * issue [#32][32]: using [Jest][jest] as a test framework
 * issue [#10][10]: Wheelie internals are now private (``registry`` and ``options``)
@@ -21,6 +24,7 @@
 * provide documentation
 
 **Bugfixes**
+
 * fixed [#22][22]: the exception system doesn't provide the right amount of information
 * fixed [#30][30]: there is no way to update Wheelie internal configurations
 * fixed [#34][34]: remove options proxies; enforce a clear way to update Wheelie defaults
