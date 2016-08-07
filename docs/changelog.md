@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.3.0 [2016-08-07]
+
+**Improvements**
+
+* issue [#36][36]: Wheelie handles automatically tasks' watchers without creating a ``watch`` task
+  in the recipe
+* issue [#37][37]: Tasks defined in a recipe can be disabled using the ``Wheelie#disable()`` API
+
+**Bugfixes**
+
+* fixed [#38][38]: adding two task with the same name, increases the size attribute
+
+[36]: https://github.com/wheelie/wheelie/issues/36
+[37]: https://github.com/wheelie/wheelie/issues/37
+[38]: https://github.com/wheelie/wheelie/issues/38
+
 ## 0.2.1 [2016-08-06]
 
 **Bugfixes**
