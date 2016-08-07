@@ -20,6 +20,12 @@ describe('Auto-watch feature', function() {
     expect(Watcher.dependencies).toEqual(['build']);
   });
 
+  it('should have __wheelie__ as default entrypoint', function() {
+    wheelie.build();
+
+    expect(wheelie._gulp.task).toHaveBeenCalledWith('default', ['__wheelie__']);
+  });
+
   it('should add the Watcher task if not in production mode', function() {
     wheelie._options.production = false;
     wheelie.build();
