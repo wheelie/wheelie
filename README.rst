@@ -82,14 +82,13 @@ Create a ``gulpfile.js`` in your project root folder with the following content:
     // importing your gulp reference
     var gulp = require('gulp');
 
-    // importing Wheelie constructor and a list of tasks (recipe)
+    // importing Wheelie constructor and a recipe
     var Wheelie = require('wheelie');
     var recipe = require('wheelie-recipe');
 
-    // adding a recipe to Wheelie, using "watch" as default task
+    // adding a Wheelie recipe
     var wheelie = new Wheelie();
     wheelie.add(recipe);
-    wheelie.setDefault('watch');
     wheelie.build();
 
     // <-- at this point, Gulp is configured with a set of tasks available in the wheelie-recipe package
@@ -99,7 +98,6 @@ With the above ``Gulpfile``, you can launch the ``watch`` task simply with:
 .. code-block:: bash
 
     $ gulp
-    $ gulp watch  # (or)
 
 Official recipes
 ----------------

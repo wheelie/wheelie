@@ -45,6 +45,29 @@ the following content:
   module.exports = new Task('assets', ['image'], run, config);
 ```
 
+## Task watchers
+
+When you're defining a ``Task`` as you did above, you can set a special attribute to the ``config``
+object, so that Wheelie can create automatically a watcher. This makes easy to create your recipe
+because you don't need to define a ``watch`` task nor to create a complex way to re-watch changes.
+
+To add a watcher, define the ``config()`` callback as follows:
+
+```javascript
+  function config(globals) {
+    // assuming src and watcher are the same
+    var source = globals.src + '/assets/**';
+
+    return {
+      watcher: source,
+      src: source,
+      dest: globals.dest + '/assets'
+    };
+  }
+```
+
+If the attribute ``watcher`` is missing, no watchers are added into the ``gulp`` instance.
+
 ## The recipe
 
 To put everything together, you should create the ``tasks/recipe.js`` file
@@ -62,6 +85,11 @@ as your recipe container:
   module.exports = [browserify, sass, assets, templates, build];
 ```
 
+**NOTE**: if you're going to use Wheelie auto-watchers, the recipe **SHOULD** expose
+a ``build`` task that does all the things.
+
+## Add the recipe
+
 To add the recipe above in Wheelie registry, simply:
 
 ```javascript
@@ -69,10 +97,10 @@ To add the recipe above in Wheelie registry, simply:
   var Wheelie = require('wheelie');
   var recipe = require('./tasks/recipe');
 
-  // add the recipe and set a default (not mandatory)
+  // add the recipe
   var wheelie = new Wheelie();
   wheelie.add(recipe);
-  wheelie.setDefault('build');
+  wheelie.build()
 ```
 
 Using this configuration, you can launch these ``Gulp`` commands:
